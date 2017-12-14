@@ -37,6 +37,7 @@ ProgressDialog progressDialog;
     }
 
 
+
     public void City(View v){
 
         Intent intent = new Intent(this,City_Post.class);
@@ -51,4 +52,9 @@ ProgressDialog progressDialog;
     }
 
 
+    public void shop(View v){
+        Intent intent = new Intent(this,Shop.class);
+        startActivity(intent);
+
+    }
 }

@@ -16,7 +16,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".City_Post" />
-        <activity android:name=".Catorgy_Post"></activity>
+        <activity android:name=".Catorgy_Post" />
+        <activity android:name=".Shop"></activity>
     </application>
 
 </manifest>
