@@ -43,4 +43,12 @@ ProgressDialog progressDialog;
         startActivity(intent);
 
     }
+    public void cat(View v){
+
+        Intent intent = new Intent(this,Catorgy_Post.class);
+        startActivity(intent);
+
+    }
+
+
 }

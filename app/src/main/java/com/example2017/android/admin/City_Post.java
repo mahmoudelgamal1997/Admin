@@ -2,7 +2,12 @@ package com.example2017.android.admin;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+import android.media.Image;
 import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -12,6 +17,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.firebase.client.Firebase;
+import com.firebase.client.core.Context;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -19,11 +25,16 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+
 public class City_Post extends AppCompatActivity {
     private DatabaseReference mdatabase;
     private Uri imageuri = null;
     private StorageReference s;
     EditText input;
+    Bitmap resized;
     ImageButton imageButton;
     public static final int gallery_Intent = 2;
     ProgressDialog progressDialog;
@@ -105,10 +116,27 @@ public class City_Post extends AppCompatActivity {
         if (requestCode == gallery_Intent && resultCode == RESULT_OK) {
 
             imageuri = data.getData();
+
+            try {
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageuri);
+
+                resized = Bitmap.createScaledBitmap(bitmap, 1000, 1020, true);
+
+
+
+
+
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+
             imageButton.setImageURI(imageuri);
         }
 
     }
+
 
 
 }
