@@ -19,6 +19,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseException;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.GenericTypeIndicator;
@@ -149,6 +150,9 @@ public class Catorgy_Post extends AppCompatActivity {
         if(!TextUtils.isEmpty(input.getText().toString() )&&imageuri!=null){
         progressDialog.setMessage("Wait...");
         progressDialog.show();
+            try {
+
+
         StorageReference filebath = s.child("photos").child(imageuri.getLastPathSegment());
         filebath.putFile(imageuri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
@@ -162,6 +166,11 @@ public class Catorgy_Post extends AppCompatActivity {
 
             }
         });
+
+
+            }catch (DatabaseException e){
+               Toast.makeText(getApplicationContext(),"There is a problem ",Toast.LENGTH_LONG).show();
+            }
 
     }else{
             if ((input.getText().toString().isEmpty()))
@@ -197,8 +206,7 @@ public class Catorgy_Post extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-
-            imageButton2.setImageURI(imageuri);
+              imageButton2.setImageBitmap(resized);
         }
 
 

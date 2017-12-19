@@ -5,10 +5,13 @@ import android.os.Bundle;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.client.Firebase;
 import com.firebase.client.core.view.View;
+import com.firebase.client.utilities.Utilities;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -18,13 +21,16 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 
+import java.io.DataInput;
 import java.util.ArrayList;
 
 public class Shop extends AppCompatActivity {
     private Spinner spinnerCity,spinnerCatorgy;
     private DatabaseReference mdatabase,mmdatabase;
-    ArrayList<String> arrayList_city=new ArrayList<>();
     ArrayList<String> arrayList_catorgy=new ArrayList<>();
+    TextView txt;
+    ArrayList<String> arrayList=new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,52 +41,59 @@ public class Shop extends AppCompatActivity {
         mdatabase = FirebaseDatabase.getInstance().getReference().child("City");
         spinnerCity=(Spinner)findViewById(R.id.spinner);
         spinnerCatorgy=(Spinner)findViewById(R.id.spinner2);
+        txt=(TextView)findViewById(R.id.textView);
+
+
 
         retrive_city();
         retrive_catorgy();
 
 
-        ArrayAdapter<String> adapter =new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,arrayList_city );
+
+//array that can solve my problem
+        arrayList.add("mahmoud");
+        arrayList.add("yasser");
+        arrayList.add("elgamal");
+
+
+
+
+        //Adapter that recieve alist of city from fire base
+        final ArrayAdapter<String> adapter =new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, retrive_city());
 
         adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-
         spinnerCity.setAdapter(adapter);
-
-       spinnerCity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spinnerCity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
            @Override
            public void
            onItemSelected(AdapterView<?> adapterView, android.view.View view, int i, long l) {
+
+
 
            }
 
            @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
 
-            }
-        });
+           }});
+
 
 
 
         ArrayAdapter<String> adapter2 =new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,arrayList_catorgy );
-
-        adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-
+        adapter2.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         spinnerCatorgy.setAdapter(adapter2);
-
         spinnerCatorgy.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
             @Override
             public void onItemSelected(AdapterView<?> adapterView, android.view.View view, int i, long l) {
-
                 spinnerCatorgy.setSelection(i);
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
 
-            }
-        });
+                spinnerCatorgy.setSelection(0);}});
 
     }
 
@@ -88,10 +101,8 @@ public class Shop extends AppCompatActivity {
 
     public void trial(android.view.View v){
 
-        System.out.println(arrayList_city);
 
     }
-
 
 
 
@@ -104,8 +115,9 @@ public class Shop extends AppCompatActivity {
         query.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+
                 Datainput cc=dataSnapshot.getValue(Datainput.class);
-                arrayList_catorgy.add(cc.getCatorgy_name().toString());
+                arrayList_catorgy.add(cc.getCatorgy_name());
             }
 
             @Override
@@ -132,14 +144,16 @@ public class Shop extends AppCompatActivity {
 
 
 
-    public void retrive_city()
+    public ArrayList<String> retrive_city()
     {
-        Query query=mdatabase.orderByChild("title");
+        final ArrayList<String> arrayList_city=new ArrayList<>();
+
+        final Query query=mdatabase.orderByChild("title");
       query.addChildEventListener(new ChildEventListener() {
           @Override
           public void onChildAdded(DataSnapshot dataSnapshot, String s) {
               City c=dataSnapshot.getValue(City.class);
-              arrayList_city.add(c.getTitle().toString());
+              arrayList_city.add(c.getTitle());
           }
 
           @Override
@@ -162,6 +176,8 @@ public class Shop extends AppCompatActivity {
 
           }
       });
+
+        return arrayList_city;
     }
 
 

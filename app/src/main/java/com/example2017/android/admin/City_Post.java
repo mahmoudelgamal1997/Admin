@@ -18,9 +18,11 @@ import android.widget.Toast;
 
 import com.firebase.client.Firebase;
 import com.firebase.client.core.Context;
+import com.firebase.client.utilities.Utilities;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -52,6 +54,8 @@ public class City_Post extends AppCompatActivity {
         mdatabase = FirebaseDatabase.getInstance().getReference().child("City");
         input = (EditText) findViewById(R.id.desc);
         progressDialog = new ProgressDialog(this);
+
+
 
 
     }
@@ -119,23 +123,13 @@ public class City_Post extends AppCompatActivity {
 
             try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageuri);
-
                 resized = Bitmap.createScaledBitmap(bitmap, 1000, 1020, true);
-
-
-
-
-
-
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
-
-            imageButton.setImageURI(imageuri);
-        }
-
-    }
+             imageButton.setImageBitmap(resized);
+            //  imageButton.setImageURI(imageuri);
+        }}
 
 
 
