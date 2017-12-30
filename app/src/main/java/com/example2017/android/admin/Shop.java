@@ -23,6 +23,8 @@ import com.google.firebase.storage.FirebaseStorage;
 
 import java.io.DataInput;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Shop extends AppCompatActivity {
     private Spinner spinnerCity,spinnerCatorgy;
@@ -48,7 +50,7 @@ public class Shop extends AppCompatActivity {
         retrive_city();
         retrive_catorgy();
 
-
+cityadd();
 
 //array that can solve my problem
         arrayList.add("mahmoud");
@@ -81,21 +83,21 @@ public class Shop extends AppCompatActivity {
 
 
 
-        ArrayAdapter<String> adapter2 =new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,arrayList_catorgy );
-        adapter2.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-        spinnerCatorgy.setAdapter(adapter2);
-        spinnerCatorgy.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, android.view.View view, int i, long l) {
-                spinnerCatorgy.setSelection(i);
-            }
+         ArrayAdapter<String> adapter2 =new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,arrayList_catorgy );
+    adapter2.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+    spinnerCatorgy.setAdapter(adapter2);
+    spinnerCatorgy.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        @Override
+        public void onItemSelected(AdapterView<?> adapterView, android.view.View view, int i, long l) {
+            spinnerCatorgy.setSelection(i);
+        }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
+        @Override
+        public void onNothingSelected(AdapterView<?> adapterView) {
 
-                spinnerCatorgy.setSelection(0);}});
+            spinnerCatorgy.setSelection(0);}});
 
-    }
+}
 
 
 
@@ -116,8 +118,10 @@ public class Shop extends AppCompatActivity {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
 
-                Datainput cc=dataSnapshot.getValue(Datainput.class);
-                arrayList_catorgy.add(cc.getCatorgy_name());
+               Datainput cc=dataSnapshot.getValue(Datainput.class);
+               arrayList_catorgy.add(cc.getCatorgy_name());
+
+                System.out.println(dataSnapshot);
             }
 
             @Override
@@ -180,7 +184,10 @@ public class Shop extends AppCompatActivity {
         return arrayList_city;
     }
 
+    public void  cityadd()
+    {
 
 
 
-}
+
+}}

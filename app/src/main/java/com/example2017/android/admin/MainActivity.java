@@ -59,4 +59,11 @@ ProgressDialog progressDialog;
         startActivity(intent);
 
     }
+
+    public void test(View v){
+
+        Intent intent = new Intent(this,TestRetrieve.class);
+        startActivity(intent);
+
+    }
 }

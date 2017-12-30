@@ -127,7 +127,7 @@ public class City_Post extends AppCompatActivity {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-             imageButton.setImageBitmap(resized);
+            imageButton.setImageBitmap(resized);
             //  imageButton.setImageURI(imageuri);
         }}
 
