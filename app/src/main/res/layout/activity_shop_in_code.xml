@@ -67,6 +67,11 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="60dp"
-        android:onClick="add" />
+        android:onClick="add"
+        android:textColor="#FFFFFF"
+        android:background="#2196F3"
+        android:backgroundTint="#2196F3" />
+
+
 
 </RelativeLayout>

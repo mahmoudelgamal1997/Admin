@@ -14,7 +14,6 @@
         android:id="@+id/image"
         android:onClick="select"
 
-
         />
 
     <EditText
@@ -31,6 +30,8 @@
         android:layout_marginTop="400dp"
         android:text="push"
         android:onClick="push"
+        android:textColor="#FFFFFF"
+        android:background="#2196F3"
         />
 </RelativeLayout>
 

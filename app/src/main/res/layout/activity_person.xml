@@ -84,10 +84,13 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Button"
+        android:text="ok"
         android:id="@+id/button7"
         android:layout_below="@+id/person5"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="45dp"
-        android:onClick="per" />
+        android:onClick="per"
+        android:textColor="#FFFFFF"
+        android:background="#2196F3"
+        />
 </RelativeLayout>

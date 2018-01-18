@@ -3,6 +3,7 @@ package com.example2017.android.admin;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -43,28 +44,39 @@ public class person extends AppCompatActivity {
 
     public void per(android.view.View v){
 
-        add_person_names(code.getText().toString().trim(),
-                p1.getText().toString().trim(),
-                p2.getText().toString().trim(),
-                p3.getText().toString().trim(),
-                p4.getText().toString().trim(),
-                p5.getText().toString().trim());
+        if(!TextUtils.isEmpty(code.getText().toString().trim())) {
 
-        Toast.makeText(getApplicationContext(),"Success",Toast.LENGTH_LONG).show();
+            add_person_names(code.getText().toString().trim(),
+                    p1.getText().toString().trim(),
+                    p2.getText().toString().trim(),
+                    p3.getText().toString().trim(),
+                    p4.getText().toString().trim(),
+                    p5.getText().toString().trim());
+
+            Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_SHORT).show();
+
+            Intent intent = new Intent(this, person.class);
+            startActivity(intent);
+        }else{
+
+            Toast.makeText(getApplicationContext(),"You should add code",Toast.LENGTH_SHORT).show();
+        }
+
     }
+
 
 
 
 
      public void add_person_names(String code,String a1,String a2,String a3,String a4,String a5)
     {
-        CodeValue c=new CodeValue();
-        c.setPerson1(a1);
-        c.setPerson2(a2);
-        c.setPerson3(a3);
-        c.setPerson4(a4);
-        c.setPerson5(a5);
-        UtilityFirebase.child(code).setValue(c);
+
+
+        UtilityFirebase.child(code).child("person1").setValue(a1);
+        UtilityFirebase.child(code).child("person2").setValue(a2);
+        UtilityFirebase.child(code).child("person3").setValue(a3);
+        UtilityFirebase.child(code).child("person4").setValue(a4);
+        UtilityFirebase.child(code).child("person5").setValue(a5);
 
 
 

@@ -2,9 +2,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-
+    android:layout_height="match_parent"
+        android:paddingTop="@dimen/activity_vertical_margin"
+>
 
 
 
@@ -15,7 +15,11 @@
             android:layout_height="wrap_content"
             android:text="Post City"
             android:onClick="City"
-            android:id="@+id/button2" />
+            android:id="@+id/button2"
+            android:textColor="#FFFFFF"
+            android:background="#2196F3"
+            android:layout_marginBottom="10dp"
+            />
 
         <Button
             android:layout_width="match_parent"
@@ -24,7 +28,11 @@
             android:id="@+id/button"
             android:layout_below="@+id/button2"
             android:layout_centerHorizontal="true"
-            android:onClick="cat" />
+            android:onClick="cat"
+            android:layout_marginBottom="10dp"
+            android:textColor="#FFFFFF"
+            android:background="#2196F3"
+            />
 
         <Button
             android:layout_width="match_parent"
@@ -33,7 +41,11 @@
             android:id="@+id/button4"
             android:layout_below="@+id/button"
             android:layout_centerHorizontal="true"
-            android:onClick="shop" />
+            android:onClick="shop"
+            android:textColor="#FFFFFF"
+            android:background="#2196F3"
+            android:layout_marginBottom="10dp"
+            />
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -41,7 +53,11 @@
             android:id="@+id/button5"
             android:layout_below="@+id/button4"
             android:layout_centerHorizontal="true"
-            android:onClick="addperson" />
+            android:onClick="addperson"
+            android:layout_marginBottom="10dp"
+            android:textColor="#FFFFFF"
+            android:background="#2196F3"
+            />
 
         <Button
             android:layout_width="match_parent"
@@ -50,7 +66,10 @@
             android:id="@+id/button6"
             android:layout_below="@+id/button5"
             android:layout_centerHorizontal="true"
-            android:onClick="test" />
+            android:onClick="test"
+            android:layout_marginBottom="10dp"
+
+            />
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -58,7 +77,10 @@
             android:id="@+id/button7"
             android:layout_below="@+id/button5"
             android:layout_centerHorizontal="true"
-            android:onClick="addshop" />
+            android:onClick="addshop"
+            android:textColor="#FFFFFF"
+            android:background="#2196F3"
+            />
 </RelativeLayout>
 
 

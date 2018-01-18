@@ -2,6 +2,7 @@ package com.example2017.android.admin;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -45,37 +46,54 @@ public class shop_in_code extends AppCompatActivity {
 
     public void add(View v){
 
-        shop.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                //to get the key of first node
-                String key=dataSnapshot.getKey();
-                add_all(key.toString(),marketname.getText().toString(),value.getText().toString());
-                Toast.makeText(getApplicationContext(),"Success",Toast.LENGTH_LONG).show();
+        if(!TextUtils.isEmpty(marketname.getText().toString().trim())&&!TextUtils.isEmpty(value.getText().toString().trim())) {
+
+
+            shop.addChildEventListener(new ChildEventListener() {
+                @Override
+                public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                    //to get the key of first node
+                    String key = dataSnapshot.getKey();
+                    add_all(key.toString(), marketname.getText().toString().trim(), value.getText().toString().trim());
+                    Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_LONG).show();
+                }
+
+                @Override
+                public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+                }
+
+                @Override
+                public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+                }
+
+                @Override
+                public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+
+        } else {
+
+            if(marketname.getText().toString().trim().isEmpty())
+            {
+                Toast.makeText(getApplicationContext(), "Market Name is Empty",Toast.LENGTH_LONG).show();
+
+            }
+            else
+            {
+                Toast.makeText(getApplicationContext(), "Value Name is Empty",Toast.LENGTH_LONG).show();
+
             }
 
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
 
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
-
+        }
 
     }
 
