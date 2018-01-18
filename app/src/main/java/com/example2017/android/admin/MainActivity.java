@@ -66,4 +66,11 @@ ProgressDialog progressDialog;
         startActivity(intent);
 
     }
+    public void addperson(View v){
+
+        Intent intent = new Intent(this,person.class);
+        startActivity(intent);
+
+    }
+
 }

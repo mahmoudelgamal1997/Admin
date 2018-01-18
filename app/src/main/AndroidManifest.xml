@@ -18,7 +18,8 @@
         <activity android:name=".City_Post" />
         <activity android:name=".Catorgy_Post" />
         <activity android:name=".Shop" />
-        <activity android:name=".TestRetrieve"></activity>
+        <activity android:name=".TestRetrieve" />
+        <activity android:name=".person"></activity>
     </application>
 
 </manifest>

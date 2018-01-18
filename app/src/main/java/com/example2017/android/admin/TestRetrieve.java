@@ -28,7 +28,7 @@ import java.util.List;
 import java.util.Map;
 
 public class TestRetrieve extends AppCompatActivity {
-DatabaseReference medo;
+DatabaseReference medo,codes;
     Spinner spinner;
     DataSnapshot sec;
     ArrayList<String> list = new ArrayList<String>();
@@ -39,7 +39,15 @@ DatabaseReference medo;
         setContentView(R.layout.activity_test_retrieve);
         Firebase.setAndroidContext(this);
 
+
         medo= FirebaseDatabase.getInstance().getReference().child("test");
+
+       codes=FirebaseDatabase.getInstance().getReference().child("codes");
+
+
+
+
+
 
         spinner=(Spinner)findViewById(R.id.spinner3);
 
@@ -122,4 +130,27 @@ DatabaseReference medo;
 
 
 
-}}
+}
+
+
+  static  public void Search(String city,ChildEventListener listener){
+
+        FirebaseDatabase.getInstance().getReference("codes").addChildEventListener( listener);
+    }
+
+
+public void but(View v)
+{
+
+CodeValue c=new CodeValue();
+    c.setPerson1("ahmed");
+    c.setPerson2("mahmoud");
+    c.setPerson3("hamdy");
+    c.setPerson4("bassam");
+    c.setPerson5("sako");
+    codes.child("11111").setValue(c);
+
+}
+
+
+}
