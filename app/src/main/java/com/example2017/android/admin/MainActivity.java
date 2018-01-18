@@ -73,4 +73,11 @@ ProgressDialog progressDialog;
 
     }
 
+    public void addshop(View v){
+
+        Intent intent = new Intent(this,shop_in_code.class);
+        startActivity(intent);
+
+    }
+
 }

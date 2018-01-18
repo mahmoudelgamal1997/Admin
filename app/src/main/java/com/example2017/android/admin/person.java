@@ -15,7 +15,6 @@ import com.google.firebase.database.FirebaseDatabase;
 public class person extends AppCompatActivity {
     DatabaseReference UtilityFirebase;
 
-    String []num={"1111","2323","2233","33333"};
     EditText p1,p2,p3,p4,p5,code;
 
     @Override
@@ -68,25 +67,5 @@ public class person extends AppCompatActivity {
         UtilityFirebase.child(code).setValue(c);
 
 
-    }    
 
-
-    public void add_all(String []s){
-
-        s=num;
-        for (int i=0;i<s.length;i++)
-        {
-
-
-
-
-            UtilityFirebase.child(s[i]).child("Town team").setValue("3");
-
-
-        }
-
-    }
-
-
-
-}
+}}

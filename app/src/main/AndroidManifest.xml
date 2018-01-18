@@ -19,7 +19,8 @@
         <activity android:name=".Catorgy_Post" />
         <activity android:name=".Shop" />
         <activity android:name=".TestRetrieve" />
-        <activity android:name=".person"></activity>
+        <activity android:name=".person" />
+        <activity android:name=".shop_in_code"></activity>
     </application>
 
 </manifest>
