@@ -40,6 +40,18 @@ public class person extends AppCompatActivity {
 
 
 
+    public void clear(android.view.View v)
+    {
+        p1.getText().clear();
+        p2.getText().clear();
+        p3.getText().clear();
+        p4.getText().clear();
+        p5.getText().clear();
+        code.getText().clear();
+
+
+
+    }
 
 
     public void per(android.view.View v){

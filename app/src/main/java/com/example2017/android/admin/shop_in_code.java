@@ -51,6 +51,13 @@ public class shop_in_code extends AppCompatActivity {
     }
 
 
+
+    public void clear(View v){
+        marketname.getText().clear();
+        value.getText().clear();
+
+    }
+
     //on click to button
     public void add(View v){
         //certain that fields not empty

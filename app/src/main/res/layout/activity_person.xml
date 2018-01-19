@@ -84,13 +84,29 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ok"
+        android:text="clear"
         android:id="@+id/button7"
+        android:layout_marginTop="51dp"
+        android:onClick="clear"
+        android:textColor="#FFFFFF"
+        android:background="#2196F3"
         android:layout_below="@+id/person5"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="45dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="43dp"
+        android:layout_marginStart="43dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ok"
+        android:id="@+id/button8"
         android:onClick="per"
         android:textColor="#FFFFFF"
         android:background="#2196F3"
-        />
+        android:layout_alignTop="@+id/button7"
+        android:layout_alignRight="@+id/person5"
+        android:layout_alignEnd="@+id/person5"
+        android:layout_marginRight="61dp"
+        android:layout_marginEnd="61dp" />
 </RelativeLayout>
