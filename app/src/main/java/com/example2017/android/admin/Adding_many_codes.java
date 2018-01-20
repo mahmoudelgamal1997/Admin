@@ -23,7 +23,7 @@ public class Adding_many_codes {
     public void add(shop_in_code m, DatabaseReference shop){
         BufferedReader reader=null;
         try {
-
+         // Assets is the location  file which contains codes
             reader=new BufferedReader(new InputStreamReader(m.getAssets().open("somecode.txt")));
 
             String word;

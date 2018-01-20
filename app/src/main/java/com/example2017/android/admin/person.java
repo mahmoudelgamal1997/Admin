@@ -1,6 +1,9 @@
 package com.example2017.android.admin;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.media.MediaPlayer;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -10,19 +13,26 @@ import android.widget.Toast;
 import com.firebase.client.Firebase;
 import com.firebase.client.core.view.View;
 import com.firebase.client.utilities.Utilities;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class person extends AppCompatActivity {
     DatabaseReference UtilityFirebase;
-
+    AlertDialog.Builder alert;
     EditText p1,p2,p3,p4,p5,code;
-
+    MediaPlayer mediaPlayer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_person);
         Firebase.setAndroidContext(this);
+
+         alert=new AlertDialog.Builder(this);
+
+        mediaPlayer = MediaPlayer.create(this, R.raw.notify);
 
         UtilityFirebase= FirebaseDatabase.getInstance().getReference().child("codes");
 
@@ -55,24 +65,54 @@ public class person extends AppCompatActivity {
 
 
     public void per(android.view.View v){
+        UtilityFirebase.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
 
-        if(!TextUtils.isEmpty(code.getText().toString().trim())) {
+                if (dataSnapshot.hasChild(code.getText().toString().trim())){
+                    if(!TextUtils.isEmpty(code.getText().toString().trim())) {
 
-            add_person_names(code.getText().toString().trim(),
-                    p1.getText().toString().trim(),
-                    p2.getText().toString().trim(),
-                    p3.getText().toString().trim(),
-                    p4.getText().toString().trim(),
-                    p5.getText().toString().trim());
+                        add_person_names(code.getText().toString().trim(),
+                                p1.getText().toString().trim(),
+                                p2.getText().toString().trim(),
+                                p3.getText().toString().trim(),
+                                p4.getText().toString().trim(),
+                                p5.getText().toString().trim());
 
-            Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_SHORT).show();
 
-            Intent intent = new Intent(this, person.class);
-            startActivity(intent);
-        }else{
 
-            Toast.makeText(getApplicationContext(),"You should add code",Toast.LENGTH_SHORT).show();
-        }
+                    }else{
+
+                        Toast.makeText(getApplicationContext(),"You should add code",Toast.LENGTH_SHORT).show();
+                    }
+
+                }else{
+                    mediaPlayer.start();
+
+                    alert.setMessage("This code isn't Available")
+                    .setCancelable(true)
+                    .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                        }
+                    });
+
+                    AlertDialog a=alert.create();
+                    a.show();
+
+
+            }}
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+
 
     }
 

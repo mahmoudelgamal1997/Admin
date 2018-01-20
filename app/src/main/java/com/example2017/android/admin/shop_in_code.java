@@ -40,6 +40,7 @@ public class shop_in_code extends AppCompatActivity {
 
         shop= FirebaseDatabase.getInstance().getReference().child("codes");
 
+
     }
 
 
