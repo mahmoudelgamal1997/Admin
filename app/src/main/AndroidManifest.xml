@@ -20,7 +20,8 @@
         <activity android:name=".Shop" />
         <activity android:name=".TestRetrieve" />
         <activity android:name=".person" />
-        <activity android:name=".shop_in_code"></activity>
+        <activity android:name=".shop_in_code" />
+        <activity android:name=".details"></activity>
     </application>
 
 </manifest>

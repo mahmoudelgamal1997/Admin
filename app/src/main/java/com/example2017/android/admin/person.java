@@ -69,10 +69,11 @@ public class person extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                if (dataSnapshot.hasChild(code.getText().toString().trim())){
-                    if(!TextUtils.isEmpty(code.getText().toString().trim())) {
+                if (dataSnapshot.hasChild(code.getText().toString().toLowerCase().trim())){
 
-                        add_person_names(code.getText().toString().trim(),
+                    if(!TextUtils.isEmpty(code.getText().toString().toLowerCase().trim())) {
+
+                        add_person_names(code.getText().toString().toLowerCase().trim(),
                                 p1.getText().toString().trim(),
                                 p2.getText().toString().trim(),
                                 p3.getText().toString().trim(),

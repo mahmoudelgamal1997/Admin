@@ -1,5 +1,6 @@
 package com.example2017.android.admin;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -26,9 +27,10 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 public class shop_in_code extends AppCompatActivity {
-    DatabaseReference shop;
-
+    DatabaseReference shop,codevalue;
+    ProgressDialog progressDialog;
     EditText marketname,value;
+    int i;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,8 +41,9 @@ public class shop_in_code extends AppCompatActivity {
         value=(EditText)findViewById(R.id.editText2);
 
         shop= FirebaseDatabase.getInstance().getReference().child("codes");
+        codevalue=FirebaseDatabase.getInstance().getReference().child("CodeValue");
 
-
+        progressDialog=new ProgressDialog(this);
     }
 
 
@@ -49,6 +52,9 @@ public class shop_in_code extends AppCompatActivity {
     {
         //this function add one value to all codes in the same time
         shop.child(c).child(k).setValue(v);
+
+        // we also add value to codevalue in database
+        codevalue.child(k).setValue(k);
     }
 
 
@@ -61,6 +67,8 @@ public class shop_in_code extends AppCompatActivity {
 
     //on click to button
     public void add(View v){
+
+
         //certain that fields not empty
         if(!TextUtils.isEmpty(marketname.getText().toString().trim())  &&  !TextUtils.isEmpty(value.getText().toString().trim()))
         {
@@ -71,7 +79,8 @@ public class shop_in_code extends AppCompatActivity {
                     //to get the key of first node
                     String key = dataSnapshot.getKey();
                     add_all(key.toString(), marketname.getText().toString().trim(), value.getText().toString().trim());
-                    Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_LONG).show();
+
+
                 }
 
                 @Override
@@ -93,7 +102,11 @@ public class shop_in_code extends AppCompatActivity {
                 public void onCancelled(DatabaseError databaseError) {
 
                 }
-            });
+
+
+            }
+
+            );
 
         } else {
 

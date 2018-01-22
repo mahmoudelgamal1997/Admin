@@ -80,4 +80,11 @@ ProgressDialog progressDialog;
 
     }
 
+    public void details(View v){
+
+        Intent intent = new Intent(this,details.class);
+        startActivity(intent);
+
+    }
+
 }
