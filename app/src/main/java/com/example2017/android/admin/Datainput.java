@@ -2,8 +2,10 @@ package com.example2017.android.admin;
 
 /**
  * Created by M7moud on 13-Dec-17.
+ * to  retrieve catorgy data
  */
 public class Datainput {
+
     private String catorgy_name;
 
     public Datainput() {

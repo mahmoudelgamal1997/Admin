@@ -67,6 +67,7 @@ public class Catorgy_Post extends AppCompatActivity {
 
     }
 
+    // button onclick
 
     public void select_imageOfcatorgy(android.view.View view)
     {
@@ -78,6 +79,8 @@ public class Catorgy_Post extends AppCompatActivity {
 
     }
 
+
+    // button onclick
     public void pushcat(android.view.View v) {
 
 
@@ -85,64 +88,6 @@ public class Catorgy_Post extends AppCompatActivity {
     }
 
 
-    public String getKeyOfcatorgy() {
-        mdatabase.orderByChild("catorgy_name")
-                .equalTo("sport")
-                .addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
-                            String clubkey = childSnapshot.getKey();
-                            k = clubkey;
-                            Toast.makeText(getApplicationContext(), clubkey, Toast.LENGTH_LONG).show();
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });
-        return k;
-    }
-
-
-    public void Search(final String catorgy) {
-//Still under development
-        Query query=mdatabase.orderByChild("catorgy_name");
-        query.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot snapshot, String previousChild) {
-                Datainput facts = snapshot.getValue(Datainput.class);
-
-
-                arrayList.add(facts.getCatorgy_name().toString());
-            }
-
-                @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-            // ....
-
-        });
-        System.out.println(flag);
-    }
 
 
     public void add_catorgy(){
@@ -158,7 +103,7 @@ public class Catorgy_Post extends AppCompatActivity {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 Uri down = taskSnapshot.getDownloadUrl();
-                DatabaseReference newpost = mdatabase.push();
+                DatabaseReference newpost = mdatabase.child(input.getText().toString());
                 newpost.child("catorgy_name").setValue(input.getText().toString());
                 newpost.child("catorgy_image").setValue(down.toString());
                 Toast.makeText(getApplicationContext(), "Post Succsesfull", Toast.LENGTH_LONG).show();
@@ -181,10 +126,7 @@ public class Catorgy_Post extends AppCompatActivity {
             if (imageuri == null) {
                 Toast.makeText(getApplicationContext(), "You should select Image", Toast.LENGTH_LONG).show();
             }
-            if(flag==false){
-                Toast.makeText(getApplicationContext(), "already Exist", Toast.LENGTH_LONG).show();
 
-            }
         }
 
     }

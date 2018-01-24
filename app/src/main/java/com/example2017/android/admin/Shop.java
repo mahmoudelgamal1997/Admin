@@ -1,9 +1,17 @@
 package com.example2017.android.admin;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -11,7 +19,9 @@ import android.widget.Toast;
 import com.firebase.client.Firebase;
 import com.firebase.client.core.view.View;
 import com.firebase.client.utilities.Utilities;
+import com.firebase.ui.database.FirebaseListAdapter;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -20,19 +30,27 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.io.DataInput;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Shop extends AppCompatActivity {
-    private Spinner spinnerCity,spinnerCatorgy;
-    private DatabaseReference mdatabase,mmdatabase;
-    ArrayList<String> arrayList_catorgy=new ArrayList<>();
-    TextView txt;
-    ArrayList<String> arrayList=new ArrayList<>();
+    private Spinner spinnerCity, spinnerCatorgy;
+    private DatabaseReference catorgy_database, city_database;
+    private StorageReference s;
 
+    ProgressDialog progressDialog;
+    TextView txt;
+    String city_selected, catorgy_selected;
+    public static final int gallery=2;
+    private Uri imageuri=null;
+    ImageButton imageButton;
+    EditText editText_shop;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,154 +58,124 @@ public class Shop extends AppCompatActivity {
         setContentView(R.layout.activity_shop);
 
         Firebase.setAndroidContext(this);
-        mdatabase = FirebaseDatabase.getInstance().getReference().child("City");
-        spinnerCity=(Spinner)findViewById(R.id.spinner);
-        spinnerCatorgy=(Spinner)findViewById(R.id.spinner2);
-        txt=(TextView)findViewById(R.id.textView);
+        city_database = FirebaseDatabase.getInstance().getReference().child("City");
+        catorgy_database = FirebaseDatabase.getInstance().getReference().child("catorgy");
+        s = FirebaseStorage.getInstance().getReference();
+
+        spinnerCity = (Spinner) findViewById(R.id.spinner_city);
+        spinnerCatorgy = (Spinner) findViewById(R.id.spinner_catorgy);
+        imageButton=(ImageButton)findViewById(R.id.imageButton);
+        editText_shop=(EditText)findViewById(R.id.editText_shop);
+
+progressDialog=new ProgressDialog(this);
+
+
+        FirebaseListAdapter<City> cityListAdapter = new FirebaseListAdapter<City>(
+                this,
+                City.class,
+                R.layout.text_style,
+                city_database
+        ) {
+            @Override
+            protected void populateView(android.view.View v, City model, int position) {
+                TextView txt = (TextView) v.findViewById(R.id.textView_style);
+                txt.setText(model.getTitle());
+
+                //taking select of user
+                //and put it in variable
+                city_selected = model.getTitle();
+
+            }
+        };
+spinnerCity.setAdapter(cityListAdapter);
+
+        FirebaseListAdapter<Datainput> catorgyListAdapter = new FirebaseListAdapter<Datainput>(
+                this,
+                Datainput.class,
+                R.layout.text_style,
+                catorgy_database
+        ) {
+            @Override
+            protected void populateView(android.view.View v, Datainput model, int position) {
+
+                TextView textView = (TextView) v.findViewById(R.id.textView_style);
+                textView.setText(model.getCatorgy_name());
+
+                //taking select of user
+                //and put it in variable
+                catorgy_selected = model.getCatorgy_name();
+            }
+        };
+
+spinnerCatorgy.setAdapter(catorgyListAdapter);
+    }
 
 
 
-        retrive_city();
-        retrive_catorgy();
+    public void upload (android.view.View view){
 
-cityadd();
+    final DatabaseReference post=catorgy_database.child(catorgy_selected).child(catorgy_selected).child(city_selected).push();
+     if (!TextUtils.isEmpty(editText_shop.getText().toString()) &&imageuri!=null){
 
-//array that can solve my problem
-        arrayList.add("mahmoud");
-        arrayList.add("yasser");
-        arrayList.add("elgamal");
+         progressDialog.setMessage("Wait..");
+         progressDialog.show();
+         progressDialog.setCancelable(false);
+        StorageReference filebath = s.child("photos").child(imageuri.getLastPathSegment());
+        filebath.putFile(imageuri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                Uri down = taskSnapshot.getDownloadUrl();
+                post.child("catorgy_name").setValue(editText_shop.getText().toString());
+                post.child("catorgy_image").setValue(down.toString());
+                Toast.makeText(getApplicationContext(), "Post Succsesfull", Toast.LENGTH_LONG).show();
+               progressDialog.dismiss();
 
+            }
+        });
 
+    }else {
+         if (TextUtils.isEmpty(editText_shop.getText().toString())){
+             Toast.makeText(getApplication(),"Enter shop name",Toast.LENGTH_LONG).show();
+         }else{
+             Toast.makeText(getApplication(),"Select an image",Toast.LENGTH_LONG).show();
 
+         }
 
-        //Adapter that recieve alist of city from fire base
-        final ArrayAdapter<String> adapter =new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, retrive_city());
+     }
 
-        adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-        spinnerCity.setAdapter(adapter);
-        spinnerCity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+    }
 
-           @Override
-           public void
-           onItemSelected(AdapterView<?> adapterView, android.view.View view, int i, long l) {
+public void select_shopimage(android.view.View v){
 
-
-
-           }
-
-           @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-           }});
-
-
-
-
-         ArrayAdapter<String> adapter2 =new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,arrayList_catorgy );
-    adapter2.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-    spinnerCatorgy.setAdapter(adapter2);
-    spinnerCatorgy.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-        @Override
-        public void onItemSelected(AdapterView<?> adapterView, android.view.View view, int i, long l) {
-            spinnerCatorgy.setSelection(i);
-        }
-
-        @Override
-        public void onNothingSelected(AdapterView<?> adapterView) {
-
-            spinnerCatorgy.setSelection(0);}});
+    Intent intent=new Intent(Intent.ACTION_PICK);
+    intent.setType("image/*");
+    startActivityForResult(intent,gallery);
 
 }
 
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==gallery&&resultCode==RESULT_OK){
 
-    public void trial(android.view.View v){
+            imageuri=data.getData();
+            imageButton.setImageURI(imageuri);
+
+            Bitmap resized = null;
+            try {
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageuri);
+
+                resized = Bitmap.createScaledBitmap(bitmap, 1000, 1020, true);
 
 
-    }
-
-
-
-
-
-    public void retrive_catorgy()
-    {
-        mmdatabase=FirebaseDatabase.getInstance().getReference().child("catorgy");
-        Query query=mmdatabase.orderByChild("catorgy_name");
-        query.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-
-               Datainput cc=dataSnapshot.getValue(Datainput.class);
-               arrayList_catorgy.add(cc.getCatorgy_name());
-
-                System.out.println(dataSnapshot);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
 
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+            imageButton.setImageBitmap(resized);
+        }
 
-            }
+        }
 
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-    }
-
-
-
-    public ArrayList<String> retrive_city()
-    {
-        final ArrayList<String> arrayList_city=new ArrayList<>();
-
-        final Query query=mdatabase.orderByChild("title");
-      query.addChildEventListener(new ChildEventListener() {
-          @Override
-          public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-              City c=dataSnapshot.getValue(City.class);
-              arrayList_city.add(c.getTitle());
-          }
-
-          @Override
-          public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-          }
-
-          @Override
-          public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-          }
-
-          @Override
-          public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-          }
-
-          @Override
-          public void onCancelled(DatabaseError databaseError) {
-
-          }
-      });
-
-        return arrayList_city;
-    }
-
-    public void  cityadd()
-    {
-
-
-
-
-}}
+}
