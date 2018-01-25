@@ -1,11 +1,7 @@
 package com.example2017.android.admin;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
-import android.media.Image;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
@@ -15,21 +11,17 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
-
 import com.firebase.client.Firebase;
-import com.firebase.client.core.Context;
-import com.firebase.client.utilities.Utilities;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-
-import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.IOException;
+
+
+
 
 public class City_Post extends AppCompatActivity {
     private DatabaseReference mdatabase;
@@ -72,8 +64,8 @@ public class City_Post extends AppCompatActivity {
     public void push(View v) {
 
         StartPosting();
-        Intent intent = new Intent(this,City_Post.class);
-        startActivity(intent);
+
+
     }
 
 
@@ -91,6 +83,7 @@ public class City_Post extends AppCompatActivity {
                     newpost.child("title").setValue(input.getText().toString());
                     newpost.child("img").setValue(down.toString());
                     Toast.makeText(getApplicationContext(), "Post Succsesfull", Toast.LENGTH_LONG).show();
+                    input.getText().clear();
                     progressDialog.dismiss();
 
 
@@ -128,7 +121,7 @@ public class City_Post extends AppCompatActivity {
                 e.printStackTrace();
             }
             imageButton.setImageBitmap(resized);
-            //  imageButton.setImageURI(imageuri);
+
         }}
 
 

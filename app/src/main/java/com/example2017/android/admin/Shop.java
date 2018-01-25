@@ -50,7 +50,7 @@ public class Shop extends AppCompatActivity {
     public static final int gallery=2;
     private Uri imageuri=null;
     ImageButton imageButton;
-    EditText editText_shop;
+    EditText editText_shop,editText_home,editText_mobile,editText_details;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,9 +65,14 @@ public class Shop extends AppCompatActivity {
         spinnerCity = (Spinner) findViewById(R.id.spinner_city);
         spinnerCatorgy = (Spinner) findViewById(R.id.spinner_catorgy);
         imageButton=(ImageButton)findViewById(R.id.imageButton);
-        editText_shop=(EditText)findViewById(R.id.editText_shop);
 
-progressDialog=new ProgressDialog(this);
+        editText_shop=(EditText)findViewById(R.id.editText_shop);
+        editText_mobile=(EditText)findViewById(R.id.editText_mobile);
+        editText_home=(EditText)findViewById(R.id.editText_home);
+        editText_details=(EditText)findViewById(R.id.editText_details);
+
+
+        progressDialog=new ProgressDialog(this);
 
 
         FirebaseListAdapter<City> cityListAdapter = new FirebaseListAdapter<City>(
@@ -114,8 +119,8 @@ spinnerCatorgy.setAdapter(catorgyListAdapter);
 
     public void upload (android.view.View view){
 
-    final DatabaseReference post=catorgy_database.child(catorgy_selected).child(catorgy_selected).child(city_selected).push();
      if (!TextUtils.isEmpty(editText_shop.getText().toString()) &&imageuri!=null){
+         final DatabaseReference post=catorgy_database.child(catorgy_selected).child(catorgy_selected).child(city_selected).child(editText_shop.getText().toString().toLowerCase().trim());
 
          progressDialog.setMessage("Wait..");
          progressDialog.show();
@@ -127,6 +132,12 @@ spinnerCatorgy.setAdapter(catorgyListAdapter);
                 Uri down = taskSnapshot.getDownloadUrl();
                 post.child("catorgy_name").setValue(editText_shop.getText().toString());
                 post.child("catorgy_image").setValue(down.toString());
+                post.child("shop_details").setValue(editText_details.getText().toString().toLowerCase().trim());
+                post.child("shop_mobile").setValue(editText_mobile.getText().toString().toLowerCase().trim());
+                post.child("shop_home").setValue(editText_home.getText().toString().toLowerCase().trim());
+
+
+
                 Toast.makeText(getApplicationContext(), "Post Succsesfull", Toast.LENGTH_LONG).show();
                progressDialog.dismiss();
 

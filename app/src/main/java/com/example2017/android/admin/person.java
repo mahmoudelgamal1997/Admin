@@ -22,8 +22,9 @@ import com.google.firebase.database.ValueEventListener;
 public class person extends AppCompatActivity {
     DatabaseReference UtilityFirebase;
     AlertDialog.Builder alert;
-    EditText p1,p2,p3,p4,p5,code;
+    EditText p1,p2,p3,p4,p5,p6,code;
     MediaPlayer mediaPlayer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +32,7 @@ public class person extends AppCompatActivity {
         Firebase.setAndroidContext(this);
 
          alert=new AlertDialog.Builder(this);
+
 
         mediaPlayer = MediaPlayer.create(this, R.raw.notify);
 
@@ -41,6 +43,7 @@ public class person extends AppCompatActivity {
         p3=(EditText)findViewById(R.id.person3);
         p4=(EditText)findViewById(R.id.person4);
         p5=(EditText)findViewById(R.id.person5);
+        p6=(EditText)findViewById(R.id.person6);
         code=(EditText)findViewById(R.id.code);
 
 
@@ -57,6 +60,7 @@ public class person extends AppCompatActivity {
         p3.getText().clear();
         p4.getText().clear();
         p5.getText().clear();
+        p6.getText().clear();
         code.getText().clear();
 
 
@@ -65,9 +69,11 @@ public class person extends AppCompatActivity {
 
 
     public void per(android.view.View v){
+
         UtilityFirebase.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+
 
                 if (dataSnapshot.hasChild(code.getText().toString().toLowerCase().trim())){
 
@@ -78,7 +84,10 @@ public class person extends AppCompatActivity {
                                 p2.getText().toString().trim(),
                                 p3.getText().toString().trim(),
                                 p4.getText().toString().trim(),
-                                p5.getText().toString().trim());
+                                p5.getText().toString().trim(),
+                                p6.getText().toString().trim()
+                                );
+
 
                         Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_SHORT).show();
 
@@ -104,7 +113,9 @@ public class person extends AppCompatActivity {
                     a.show();
 
 
-            }}
+            }
+
+            }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
@@ -114,14 +125,13 @@ public class person extends AppCompatActivity {
 
 
 
-
     }
 
 
 
 
 
-     public void add_person_names(String code,String a1,String a2,String a3,String a4,String a5)
+     public void add_person_names(String code,String a1,String a2,String a3,String a4,String a5,String a6)
     {
 
 
@@ -130,6 +140,7 @@ public class person extends AppCompatActivity {
         UtilityFirebase.child(code).child("person3").setValue(a3);
         UtilityFirebase.child(code).child("person4").setValue(a4);
         UtilityFirebase.child(code).child("person5").setValue(a5);
+        UtilityFirebase.child(code).child("phone").setValue(a6);
 
 
 

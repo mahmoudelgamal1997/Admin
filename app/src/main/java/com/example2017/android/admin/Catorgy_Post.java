@@ -37,14 +37,11 @@ import java.util.List;
 
 public class Catorgy_Post extends AppCompatActivity {
     private DatabaseReference mdatabase;
-    final ArrayList<String> arrayList=new ArrayList<>();
     private Uri imageuri = null;
-    boolean flag;
 
     private StorageReference s;
     EditText input;
     Bitmap resized;
-    String k, InputCatorgy;
     ImageButton imageButton2;
     public static final int gallery_Intent = 3;
     ProgressDialog progressDialog;
@@ -107,6 +104,7 @@ public class Catorgy_Post extends AppCompatActivity {
                 newpost.child("catorgy_name").setValue(input.getText().toString());
                 newpost.child("catorgy_image").setValue(down.toString());
                 Toast.makeText(getApplicationContext(), "Post Succsesfull", Toast.LENGTH_LONG).show();
+                input.getText().clear();
                 progressDialog.dismiss();
 
             }

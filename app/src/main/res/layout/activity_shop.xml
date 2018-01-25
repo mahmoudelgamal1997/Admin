@@ -52,6 +52,38 @@
         android:layout_alignParentStart="true"
         android:layout_alignRight="@+id/imageButton"
         android:layout_alignEnd="@+id/imageButton" />
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText_home"
+        android:inputType="number"
+        android:hint="Enter Shop home number"
+        android:layout_below="@+id/editText_shop"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/imageButton"
+        android:layout_alignEnd="@+id/imageButton" />
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText_mobile"
+        android:hint="Enter Shop mobile number"
+        android:inputType="number"
+        android:layout_below="@+id/editText_home"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/imageButton"
+        android:layout_alignEnd="@+id/imageButton" />
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText_details"
+        android:hint="Enter Shop details"
+        android:layout_below="@+id/editText_mobile"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/imageButton"
+        android:layout_alignEnd="@+id/imageButton" />
 
     <Button
         android:layout_width="wrap_content"
@@ -61,7 +93,7 @@
         android:onClick="upload"
         android:textColor="#FFFFFF"
         android:background="#2196F3"
-        android:layout_below="@+id/editText_shop"
+        android:layout_below="@+id/editText_details"
         android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
