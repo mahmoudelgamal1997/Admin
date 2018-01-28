@@ -21,7 +21,9 @@
         <activity android:name=".TestRetrieve" />
         <activity android:name=".person" />
         <activity android:name=".shop_in_code" />
-        <activity android:name=".details"></activity>
+        <activity android:name=".details" />
+        <activity android:name=".OfferCard" />
+        <activity android:name=".EldalelSetting"></activity>
     </application>
 
 </manifest>

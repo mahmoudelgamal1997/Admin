@@ -12,7 +12,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="سوف تضيف هذه القيمه لكل الاكواد دفعه واحده"
+        android:text="سوف تضيف عدد زيارات لكل الاكواد دفعه واحده لكل محل"
         android:id="@+id/textView2"
         android:textSize="20dp"
         android:layout_alignParentTop="true"
