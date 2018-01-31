@@ -65,7 +65,32 @@
             />
 
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="اضافه محل واحد لكود واحد"
+        android:id="@+id/button9"
+        android:layout_below="@+id/button8"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:onClick="onecode"
+        android:textColor="#FFFFFF"
+        android:background="#2196F3"
 
+        />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="delete"
+        android:id="@+id/button10"
+        android:layout_below="@+id/button9"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:onClick="delete"
+        android:textColor="#FFFFFF"
+        android:background="#2196F3"
+
+        />
 
 
 

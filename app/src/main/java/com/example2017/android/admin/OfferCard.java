@@ -35,6 +35,18 @@ public class OfferCard extends AppCompatActivity {
         startActivity(intent);
 
     }
+    public void onecode(View v){
 
+        Intent intent = new Intent(this,shop_in_one_code.class);
+        startActivity(intent);
+
+    }
+
+    public void delete(View v){
+
+        Intent intent = new Intent(this,delete.class);
+        startActivity(intent);
+
+    }
 
 }

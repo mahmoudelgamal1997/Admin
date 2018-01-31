@@ -68,7 +68,7 @@ public class shop_in_code extends AppCompatActivity {
     //on click to button
     public void add(View v){
 
-
+        i=0;
         //certain that fields not empty
         if(!TextUtils.isEmpty(marketname.getText().toString().trim())  &&  !TextUtils.isEmpty(value.getText().toString().trim()))
         {
@@ -80,7 +80,11 @@ public class shop_in_code extends AppCompatActivity {
                     String key = dataSnapshot.getKey();
                     add_all(key.toString(), marketname.getText().toString().trim(), value.getText().toString().trim());
 
-
+      if (i==1999){
+    Toast.makeText(getApplicationContext(),"Done",Toast.LENGTH_LONG).show();
+          }else{
+          i++;
+      }
                 }
 
                 @Override
