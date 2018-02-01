@@ -50,7 +50,7 @@ public class Shop extends AppCompatActivity {
     public static final int gallery=2;
     private Uri imageuri=null;
     ImageButton imageButton;
-    EditText editText_shop,editText_home,editText_mobile,editText_details;
+    EditText editText_shop,editText_home,editText_home2,editText_home3,editText_mobile,editText_mobile2,editText_mobile3,editText_mobile4,editText_details,facebook,Instgram,Twitter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +68,18 @@ public class Shop extends AppCompatActivity {
 
         editText_shop=(EditText)findViewById(R.id.editText_shop);
         editText_mobile=(EditText)findViewById(R.id.editText_mobile);
+        editText_mobile2=(EditText)findViewById(R.id.editText_mobile2);
+        editText_mobile3=(EditText)findViewById(R.id.editText_mobile3);
+        editText_mobile4=(EditText)findViewById(R.id.editText_mobile4);
         editText_home=(EditText)findViewById(R.id.editText_home);
+        editText_home2=(EditText)findViewById(R.id.editText_home2);
+        editText_home3=(EditText)findViewById(R.id.editText_home3);
+        facebook=(EditText)findViewById(R.id.editText_facebook);
+        Instgram=(EditText)findViewById(R.id.editText_Instgram);
+        Twitter=(EditText)findViewById(R.id.editText_Twitter);
+
+
+
         editText_details=(EditText)findViewById(R.id.editText_details);
 
 
@@ -133,9 +144,23 @@ spinnerCatorgy.setAdapter(catorgyListAdapter);
                 post.child("catorgy_name").setValue(editText_shop.getText().toString());
                 post.child("catorgy_image").setValue(down.toString());
                 post.child("shop_details").setValue(editText_details.getText().toString().toLowerCase().trim());
-                post.child("shop_mobile").setValue(editText_mobile.getText().toString().toLowerCase().trim());
-                post.child("shop_home").setValue(editText_home.getText().toString().toLowerCase().trim());
 
+
+                    post.child("shop_mobile").setValue(editText_mobile.getText().toString().toLowerCase().trim());
+
+                post.child("shop_mobile2").setValue(editText_mobile2.getText().toString().toLowerCase().trim());
+                post.child("shop_mobile3").setValue(editText_mobile3.getText().toString().toLowerCase().trim());
+                post.child("shop_mobile4").setValue(editText_mobile4.getText().toString().toLowerCase().trim());
+
+
+                post.child("shop_home").setValue(editText_home.getText().toString().toLowerCase().trim());
+                post.child("shop_home2").setValue(editText_home2.getText().toString().toLowerCase().trim());
+                post.child("shop_home3").setValue(editText_home3.getText().toString().toLowerCase().trim());
+
+
+                post.child("Facebook").setValue(facebook.getText().toString().toLowerCase().trim());
+                post.child("Instgram").setValue(Instgram.getText().toString().toLowerCase().trim());
+                post.child("Twitter").setValue(Twitter.getText().toString().toLowerCase().trim());
 
 
                 Toast.makeText(getApplicationContext(), "Post Succsesfull", Toast.LENGTH_LONG).show();

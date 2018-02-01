@@ -31,6 +31,8 @@
         android:layout_height="wrap_content"
         android:text="delete"
         android:onClick="okDelete"
+        android:textColor="#FFFFFF"
+        android:background="#2196F3"
         android:layout_below="@+id/spinner2"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="81dp" />

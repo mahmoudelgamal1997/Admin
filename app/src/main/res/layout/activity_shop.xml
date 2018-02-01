@@ -63,13 +63,101 @@
         android:layout_alignParentStart="true"
         android:layout_alignRight="@+id/imageButton"
         android:layout_alignEnd="@+id/imageButton" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText_home2"
+        android:inputType="number"
+        android:hint="Enter Shop home number"
+        android:layout_below="@+id/editText_home"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/imageButton"
+        android:layout_alignEnd="@+id/imageButton" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText_home3"
+        android:inputType="number"
+        android:hint="Enter Shop home number"
+        android:layout_below="@+id/editText_home2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/imageButton"
+        android:layout_alignEnd="@+id/imageButton" />
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/editText_mobile"
         android:hint="Enter Shop mobile number"
         android:inputType="number"
-        android:layout_below="@+id/editText_home"
+        android:layout_below="@+id/editText_home3"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/imageButton"
+        android:layout_alignEnd="@+id/imageButton" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText_mobile2"
+        android:hint="Enter Shop mobile number"
+        android:layout_below="@+id/editText_mobile"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/imageButton"
+        android:layout_alignEnd="@+id/imageButton" />
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText_mobile3"
+        android:hint="Enter Shop mobile number"
+        android:layout_below="@+id/editText_mobile2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/imageButton"
+        android:layout_alignEnd="@+id/imageButton" />
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText_mobile4"
+        android:hint="Enter Shop mobile number"
+        android:layout_below="@+id/editText_mobile3"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/imageButton"
+        android:layout_alignEnd="@+id/imageButton" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText_facebook"
+        android:hint="Enter Shop Facebook"
+        android:layout_below="@+id/editText_mobile4"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/imageButton"
+        android:layout_alignEnd="@+id/imageButton" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText_Instgram"
+        android:hint="Enter Shop Instgram"
+        android:layout_below="@+id/editText_facebook"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/imageButton"
+        android:layout_alignEnd="@+id/imageButton" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText_Twitter"
+        android:hint="Enter Shop Twitter"
+        android:layout_below="@+id/editText_Instgram"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignRight="@+id/imageButton"
@@ -79,19 +167,20 @@
         android:layout_height="wrap_content"
         android:id="@+id/editText_details"
         android:hint="Enter Shop details"
-        android:layout_below="@+id/editText_mobile"
+        android:layout_below="@+id/editText_Twitter"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignRight="@+id/imageButton"
         android:layout_alignEnd="@+id/imageButton" />
-
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="ok"
+        android:textSize="20dp"
         android:id="@+id/button10"
         android:onClick="upload"
         android:textColor="#FFFFFF"
+        android:layout_marginTop="10dp"
         android:background="#2196F3"
         android:layout_below="@+id/editText_details"
         android:layout_centerHorizontal="true" />

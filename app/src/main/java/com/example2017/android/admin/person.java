@@ -22,7 +22,7 @@ import com.google.firebase.database.ValueEventListener;
 public class person extends AppCompatActivity {
     DatabaseReference UtilityFirebase;
     AlertDialog.Builder alert;
-    EditText p1,p2,p3,p4,p5,p6,code;
+    EditText p1,p2,p3,p4,p5,p6,code,adress;
     MediaPlayer mediaPlayer;
 
     @Override
@@ -45,6 +45,7 @@ public class person extends AppCompatActivity {
         p5=(EditText)findViewById(R.id.person5);
         p6=(EditText)findViewById(R.id.person6);
         code=(EditText)findViewById(R.id.code);
+        adress=(EditText)findViewById(R.id.person7);
 
 
 
@@ -62,7 +63,7 @@ public class person extends AppCompatActivity {
         p5.getText().clear();
         p6.getText().clear();
         code.getText().clear();
-
+        adress.getText().clear();
 
 
     }
@@ -85,7 +86,8 @@ public class person extends AppCompatActivity {
                                 p3.getText().toString().trim(),
                                 p4.getText().toString().trim(),
                                 p5.getText().toString().trim(),
-                                p6.getText().toString().trim()
+                                p6.getText().toString().trim(),
+                                adress.getText().toString().trim()
                                 );
 
 
@@ -131,7 +133,7 @@ public class person extends AppCompatActivity {
 
 
 
-     public void add_person_names(String code,String a1,String a2,String a3,String a4,String a5,String a6)
+     public void add_person_names(String code,String a1,String a2,String a3,String a4,String a5,String a6,String adress)
     {
 
 
@@ -141,6 +143,7 @@ public class person extends AppCompatActivity {
         UtilityFirebase.child(code).child("person4").setValue(a4);
         UtilityFirebase.child(code).child("person5").setValue(a5);
         UtilityFirebase.child(code).child("phone").setValue(a6);
+        UtilityFirebase.child(code).child("adress").setValue(adress);
 
 
 
