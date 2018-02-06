@@ -41,11 +41,10 @@ import java.util.Map;
 
 public class Shop extends AppCompatActivity {
     private Spinner spinnerCity, spinnerCatorgy;
-    private DatabaseReference catorgy_database, city_database;
+    private DatabaseReference catorgy_database, city_database,cover;
     private StorageReference s;
 
     ProgressDialog progressDialog;
-    TextView txt;
     String city_selected, catorgy_selected;
     public static final int gallery=2;
     private Uri imageuri=null;
@@ -61,6 +60,8 @@ public class Shop extends AppCompatActivity {
         city_database = FirebaseDatabase.getInstance().getReference().child("City");
         catorgy_database = FirebaseDatabase.getInstance().getReference().child("catorgy");
         s = FirebaseStorage.getInstance().getReference();
+        cover=FirebaseDatabase.getInstance().getReference().child("cover");
+
 
         spinnerCity = (Spinner) findViewById(R.id.spinner_city);
         spinnerCatorgy = (Spinner) findViewById(R.id.spinner_catorgy);
@@ -143,10 +144,12 @@ spinnerCatorgy.setAdapter(catorgyListAdapter);
                 Uri down = taskSnapshot.getDownloadUrl();
                 post.child("catorgy_name").setValue(editText_shop.getText().toString());
                 post.child("catorgy_image").setValue(down.toString());
+
+                cover.child("catorgy_image").setValue(down.toString());
                 post.child("shop_details").setValue(editText_details.getText().toString().toLowerCase().trim());
 
 
-                    post.child("shop_mobile").setValue(editText_mobile.getText().toString().toLowerCase().trim());
+                post.child("shop_mobile").setValue(editText_mobile.getText().toString().toLowerCase().trim());
 
                 post.child("shop_mobile2").setValue(editText_mobile2.getText().toString().toLowerCase().trim());
                 post.child("shop_mobile3").setValue(editText_mobile3.getText().toString().toLowerCase().trim());
@@ -161,6 +164,7 @@ spinnerCatorgy.setAdapter(catorgyListAdapter);
                 post.child("Facebook").setValue(facebook.getText().toString().toLowerCase().trim());
                 post.child("Instgram").setValue(Instgram.getText().toString().toLowerCase().trim());
                 post.child("Twitter").setValue(Twitter.getText().toString().toLowerCase().trim());
+
 
 
                 Toast.makeText(getApplicationContext(), "Post Succsesfull", Toast.LENGTH_LONG).show();

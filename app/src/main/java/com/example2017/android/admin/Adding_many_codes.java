@@ -18,7 +18,12 @@ import java.io.InputStreamReader;
  */
 public class Adding_many_codes {
 
+/*
+add this code in shop_in_code
 
+  Adding_many_codes a=new Adding_many_codes();
+        a.add(this,shop);
+ */
 
     public void add(shop_in_code m, DatabaseReference shop){
         BufferedReader reader=null;
@@ -30,7 +35,7 @@ public class Adding_many_codes {
             while ((word=reader.readLine())!=null){
                 System.out.println(word);
 
-                shop.child(word).child("value").setValue("none");
+                shop.child(word).child("value").setValue("0");
             }
 
             reader.close();

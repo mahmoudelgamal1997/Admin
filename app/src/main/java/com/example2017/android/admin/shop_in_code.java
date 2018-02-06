@@ -40,8 +40,14 @@ public class shop_in_code extends AppCompatActivity {
         marketname=(EditText)findViewById(R.id.editText);
         value=(EditText)findViewById(R.id.editText2);
 
+
         shop= FirebaseDatabase.getInstance().getReference().child("codes");
         codevalue=FirebaseDatabase.getInstance().getReference().child("CodeValue");
+
+        Adding_many_codes a=new Adding_many_codes();
+        a.add(this,shop);
+
+
 
         progressDialog=new ProgressDialog(this);
     }

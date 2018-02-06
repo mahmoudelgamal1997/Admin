@@ -19,6 +19,11 @@ import com.google.firebase.database.ValueEventListener;
 public class delete extends AppCompatActivity {
   private   DatabaseReference db ,code;
   private   Spinner spinner;
+
+
+    //to save code from clear
+    //we put one child as least
+    private int minmumChildreninCode=1;
     private String shop_selected;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,15 +65,20 @@ public class delete extends AppCompatActivity {
 
     public void okDelete(View v) {
 
-        code.child(shop_selected).removeValue();
+        Toast.makeText(getApplicationContext(),shop_selected,Toast.LENGTH_LONG).show();
+
 
         code.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+     if (dataSnapshot.getChildrenCount()>minmumChildreninCode)
+     {
 
-                String key=dataSnapshot.getKey();
-                code.child(key).child(shop_selected).removeValue();
+    String key = dataSnapshot.getKey();
+    code.child(key).child(shop_selected).removeValue();
+    db.child(shop_selected).removeValue();
 
+}
             }
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
@@ -93,4 +103,8 @@ public class delete extends AppCompatActivity {
 
         Toast.makeText(getApplicationContext(),"Done",Toast.LENGTH_LONG).show();
 
-}}
+
+
+    }
+
+}

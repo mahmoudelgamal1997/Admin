@@ -12,7 +12,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="سوف تضيف عدد زيارات لكل الاكواد دفعه واحده لكل محل"
+        android:text="سوف تضيف هذه القيمه لكود واحد فقط علما"
         android:id="@+id/textView2"
         android:textSize="20dp"
         android:layout_alignParentTop="true"
@@ -105,14 +105,14 @@
         android:text="clear"
         android:id="@+id/button9"
         android:layout_marginBottom="65dp"
-        android:onClick="clear"
+        android:onClick="clear_onecode"
         android:textColor="#FFFFFF"
         android:background="#2196F3"
         android:backgroundTint="#2196F3"
         android:layout_alignParentBottom="true"
         android:layout_alignRight="@+id/button8"
         android:layout_alignEnd="@+id/button8"
-        android:layout_marginRight="50dp"
+        android:layout_marginRight="150dp"
         android:layout_marginEnd="150dp" />
 
 
