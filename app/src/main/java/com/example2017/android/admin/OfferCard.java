@@ -49,4 +49,10 @@ public class OfferCard extends AppCompatActivity {
 
     }
 
+    public void visit(View v){
+
+        Intent intent = new Intent(this,ShopVisitor.class);
+        startActivity(intent);
+
+    }
 }

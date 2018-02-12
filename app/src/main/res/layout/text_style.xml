@@ -13,4 +13,14 @@
         android:id="@+id/textView_style"
         android:layout_alignParentTop="true"
        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text=""
+        android:textSize="30dp"
+        android:id="@+id/textView_numberOfVisits"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 </RelativeLayout>

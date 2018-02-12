@@ -27,7 +27,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 public class shop_in_code extends AppCompatActivity {
-    DatabaseReference shop,codevalue;
+    DatabaseReference shop,codevalue,ShopVisitors;
     ProgressDialog progressDialog;
     EditText marketname,value;
     int i;
@@ -44,6 +44,7 @@ public class shop_in_code extends AppCompatActivity {
         shop= FirebaseDatabase.getInstance().getReference().child("codes");
         codevalue=FirebaseDatabase.getInstance().getReference().child("CodeValue");
 
+
         Adding_many_codes a=new Adding_many_codes();
         a.add(this,shop);
 
@@ -54,13 +55,13 @@ public class shop_in_code extends AppCompatActivity {
 
 
 
-    public void add_all(String c,String k,String v)
+    public void add_all(String code,String ShopName,String value)
     {
         //this function add one value to all codes in the same time
-        shop.child(c).child(k).setValue(v);
+        shop.child(code).child(ShopName).setValue(value);
 
         // we also add value to codevalue in database
-        codevalue.child(k).setValue(k);
+        codevalue.child(ShopName).setValue(ShopName);
     }
 
 

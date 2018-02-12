@@ -27,7 +27,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Small Text"
+        android:text=""
         android:id="@+id/date_time"
         android:layout_below="@+id/shop_name"
         android:layout_alignParentLeft="true"

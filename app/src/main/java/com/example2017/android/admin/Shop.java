@@ -41,9 +41,9 @@ import java.util.Map;
 
 public class Shop extends AppCompatActivity {
     private Spinner spinnerCity, spinnerCatorgy;
-    private DatabaseReference catorgy_database, city_database,cover;
+    private DatabaseReference catorgy_database, city_database,ShopVisitors;
     private StorageReference s;
-
+int initialVisits =0;
     ProgressDialog progressDialog;
     String city_selected, catorgy_selected;
     public static final int gallery=2;
@@ -60,7 +60,7 @@ public class Shop extends AppCompatActivity {
         city_database = FirebaseDatabase.getInstance().getReference().child("City");
         catorgy_database = FirebaseDatabase.getInstance().getReference().child("catorgy");
         s = FirebaseStorage.getInstance().getReference();
-        cover=FirebaseDatabase.getInstance().getReference().child("cover");
+        ShopVisitors=FirebaseDatabase.getInstance().getReference().child("ShopVisitors");
 
 
         spinnerCity = (Spinner) findViewById(R.id.spinner_city);
@@ -145,7 +145,11 @@ spinnerCatorgy.setAdapter(catorgyListAdapter);
                 post.child("catorgy_name").setValue(editText_shop.getText().toString());
                 post.child("catorgy_image").setValue(down.toString());
 
-                cover.child("catorgy_image").setValue(down.toString());
+
+                 ShopVisitors.child(editText_shop.getText().toString()).child("ShopName").setValue(editText_shop.getText().toString());
+                 ShopVisitors.child(editText_shop.getText().toString()).child("visits").setValue(String.valueOf(initialVisits));
+
+
                 post.child("shop_details").setValue(editText_details.getText().toString().toLowerCase().trim());
 
 
